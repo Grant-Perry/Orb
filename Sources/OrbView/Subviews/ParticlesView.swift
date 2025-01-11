@@ -138,19 +138,19 @@ class ParticleScene: SKScene {
 	  return SKTexture(cgImage: cgImage)
    }
 
-    private func createParticleTextureiOS() -> SKTexture {
-        let size = CGSize(width: 8, height: 8)  // Smaller size for better performance
-        let renderer = UIGraphicsImageRenderer(size: size)
-        
-        let image = renderer.image { context in
-            // Simple filled white circle
-            UIColor.white.setFill()
-            let circlePath = UIBezierPath(ovalIn: CGRect(origin: .zero, size: size))
-            circlePath.fill()
-        }
-        
-        return SKTexture(image: image)
-    }
+//    private func createParticleTextureiOS() -> SKTexture {
+//        let size = CGSize(width: 8, height: 8)  // Smaller size for better performance
+//        let renderer = UIGraphicsImageRenderer(size: size)
+//        
+//        let image = renderer.image { context in
+//            // Simple filled white circle
+//            UIColor.white.setFill()
+//            let circlePath = UIBezierPath(ovalIn: CGRect(origin: .zero, size: size))
+//            circlePath.fill()
+//        }
+//        
+//        return SKTexture(image: image)
+//    }
 }
 
 struct ParticlesView: View {
@@ -175,9 +175,9 @@ struct ParticlesView: View {
     
     var body: some View {
         GeometryReader { geometry in
-            SpriteView(scene: scene, options: [.allowsTransparency])
-                .frame(width: geometry.size.width, height: geometry.size.height)
-                .ignoresSafeArea()
+		   SpriteView(scene: scene)
+			  .frame(width: geometry.size.width, height: geometry.size.height)
+			  .ignoresSafeArea()
         }
     }
 }
