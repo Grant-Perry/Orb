@@ -109,8 +109,36 @@ class ParticleScene: SKScene {
         
         addChild(emitter)
     }
-    
-    private func createParticleTexture() -> SKTexture {
+
+   private func createParticleTexture() -> SKTexture {
+	  let size = CGSize(width: 8, height: 8)  // Smaller size for better performance
+
+	  // Create a Core Graphics context for drawing
+	  UIGraphicsBeginImageContextWithOptions(size, false, 0)
+	  guard let context = UIGraphicsGetCurrentContext() else {
+		 fatalError("Failed to create graphics context")
+	  }
+
+	  // Set the fill color to white
+	  context.setFillColor(UIColor.white.cgColor)
+
+	  // Draw a filled circle
+	  let circleRect = CGRect(origin: .zero, size: size)
+	  context.fillEllipse(in: circleRect)
+
+	  // Capture the image
+	  let image = UIGraphicsGetImageFromCurrentImageContext()
+	  UIGraphicsEndImageContext()
+
+	  // Ensure the image is not nil
+	  guard let cgImage = image?.cgImage else {
+		 fatalError("Failed to create CGImage from context")
+	  }
+
+	  return SKTexture(cgImage: cgImage)
+   }
+
+    private func createParticleTextureiOS() -> SKTexture {
         let size = CGSize(width: 8, height: 8)  // Smaller size for better performance
         let renderer = UIGraphicsImageRenderer(size: size)
         
